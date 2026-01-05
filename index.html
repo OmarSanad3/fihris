@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- Icons -->
   <link href="./css/all.min.css" rel="stylesheet" />
 
@@ -16,7 +19,326 @@
 </head>
 
 <body>
+  <div class="flex bg-gray-50 dark:bg-gray-950 min-h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-white dark:bg-gray-900 border-gray-200 border-x dark:border-gray-800">
+      <div
+        class="flex items-center gap-3 p-4 border-gray-200 dark:border-gray-800 border-b font-semibold text-gray-900 dark:text-white">
+        <i class="text-blue-600 dark:text-blue-400 text-xl fa-solid fa-book"></i>
+        <span class="font-semibold text-gray-900 dark:text-white text-xl">Fihris</span>
+      </div>
+      <div class="space-y-2 p-4">
+        <button class="side-btn">
+          <i class="fa-solid fa-chart-simple"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="side-btn active">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Books</span>
+        </button>
+        <button class="side-btn">
+          <i class="fa-user-group fa-solid"></i>
+          <span>Authors</span>
+        </button>
+        <button class="side-btn">
+          <i class="fa-regular fa-folder-open"></i>
+          <span>Categories</span>
+        </button>
+        <button class="side-btn">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </button>
+      </div>
+    </aside>
 
+    <main class="flex flex-col flex-1">
+      <header id="content-title"
+        class="flex justify-between items-center bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
+        <h1 class="text-gray-900 dark:text-white text-2xl">Dashboard</h1>
+        <div class="flex justify-between items-center gap-3">
+          <div class="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+            <button
+              class="bg-white dark:bg-gray-700 shadow-sm px-3 py-1.5 rounded-md text-gray-900 dark:text-white transition-colors">
+              En
+            </button>
+            <button
+              class="px-3 py-1.5 rounded-md text-gray-600 hover:text-gray-900 dark:hover:text-white dark:text-gray-400 transition-colors">
+              Ar
+            </button>
+          </div>
+          <button
+            class="flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
+            <i class="text-xl fa-solid fa-moon"></i>
+          </button>
+          <button
+            class="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300">
+            <div class="flex justify-center items-center bg-blue-600 p-2 rounded-full w-8 h-8 text-white">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <span>Admin</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </header>
+
+      <section id="dashboard-section" class="hidden section">
+        <div class="flex flex-wrap gap-6">
+          <div
+            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div class="flex flex-col">
+              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+              <p class="text-gray-900 dark:text-white">10</p>
+            </div>
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            </div>
+          </div>
+          <div
+            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div class="flex flex-col">
+              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+              <p class="text-gray-900 dark:text-white">10</p>
+            </div>
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            </div>
+          </div>
+          <div
+            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div class="flex flex-col">
+              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+              <p class="text-gray-900 dark:text-white">10</p>
+            </div>
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            </div>
+          </div>
+          <div
+            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div class="flex flex-col">
+              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+              <p class="text-gray-900 dark:text-white">10</p>
+            </div>
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center lg:justify-between gap-6 w-full">
+          <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
+            <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Books per Category</h2>
+            <canvas id="bookPerCategory"></canvas>
+          </div>
+          <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
+            <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Borrowed vs Available</h2>
+            <canvas id="borrowedVSAvailable"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="books-section" class="section">
+        <div class="flex justify-between">
+          <div>
+            <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Books Management</h2>
+            <p class="text-gray-600 dark:text-gray-400">10 books</p>
+          </div>
+          <button id="open-add-book-btn"
+            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Book</span>
+          </button>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 mb-6 p-4 border border-gray-200 dark:border-gray-700 rounded-xl">
+          <div class="flex lg:flex-row flex-col gap-4">
+            <div class="relative flex-1">
+              <i class="top-1/2 left-3 absolute text-gray-500 -translate-y-1/2 transform fa-solid fa-search"></i>
+              <input type="search"
+                class="bg-gray-50 dark:bg-gray-900 py-2 pr-4 pl-10 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-gray-900 dark:text-white placeholder-gray-500"
+                placeholder="Search for books...">
+            </div>
+            <select name="category" id="select-category" class="selection-element">
+              <option value="all" selected>All Categories</option>
+              <option value="fiction">Fiction</option>
+              <option value="non-fiction">Non-Fiction</option>
+              <option value="science">Science</option>
+              <option value="history">History</option>
+              <option value="biography">Biography</option>
+            </select>
+            <select name="status" id="select-status" class="selection-element">
+              <option value="all" selected>All Statuses</option>
+              <option value="available">Available</option>
+              <option value="borrowed">Borrowed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+                <tr>
+                  <th class="th-element">Book Title</th>
+                  <th class="th-element">ISBN</th>
+                  <th class="th-element">Author</th>
+                  <th class="th-element">Category</th>
+                  <th class="th-element">Status</th>
+                  <th class="th-element">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-first">Harry Potter and the Philosopher's Stone</td>
+                  <td class="td-element">978-0-7475-3269-9</td>
+                  <td class="td-element">J.K. Rowling</td>
+                  <td class="td-element">Fiction</td>
+                  <td class="group td-element" data-status="available">
+                    <span
+                      class="hidden group-data-[status=available]:inline bg-green-100 dark:bg-green-900/20 px-2 py-1 rounded-full text-green-700 dark:text-green-400 text-xs">
+                      Available
+                    </span>
+                    <span
+                      class="hidden group-data-[status=borrowed]:inline bg-orange-100 dark:bg-orange-900/20 px-2 py-1 rounded-full text-orange-700 dark:text-orange-400 text-xs">
+                      Borrowed
+                    </span>
+                  </td>
+                  <td class="gap-2 td-element">
+                    <div class="flex justify-evenly items-center gap-3">
+                      <button
+                        class="hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-lg text-blue-600 dark:text-blue-400">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button
+                        class="hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-lg text-red-600 dark:text-red-400">
+                        <i class="fa-regular fa-trash-can"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-first">Harry Potter and the Philosopher's Stone</td>
+                  <td class="td-element">978-0-7475-3269-9</td>
+                  <td class="td-element">J.K. Rowling</td>
+                  <td class="td-element">Fiction</td>
+                  <td class="group td-element" data-status="borrowed">
+                    <span
+                      class="hidden group-data-[status=available]:inline bg-green-100 dark:bg-green-900/20 px-2 py-1 rounded-full text-green-700 dark:text-green-400 text-xs">
+                      Available
+                    </span>
+                    <span
+                      class="hidden group-data-[status=borrowed]:inline bg-orange-100 dark:bg-orange-900/20 px-2 py-1 rounded-full text-orange-700 dark:text-orange-400 text-xs">
+                      Borrowed
+                    </span>
+                  </td>
+                  <td class="gap-2 td-element">
+                    <div class="flex justify-evenly items-center gap-3">
+                      <button
+                        class="hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-lg text-blue-600 dark:text-blue-400">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button
+                        class="hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-lg text-red-600 dark:text-red-400">
+                        <i class="fa-regular fa-trash-can"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="authors-section" class="hidden section">
+      </section>
+
+      <section id="categories-section" class="hidden section">
+
+      </section>
+
+      <section id="settings-section" class="hidden section">
+      </section>
+    </main>
+  </div>
+
+  <!-- ------------------------------- Add Book Popup ------------------------------- -->
+  <div id="add-book-modal" class="z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
+
+    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-semibold text-gray-800 text-xl">Add New Book</h3>
+        <button id="close-add-book-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+
+      <form id="add-book-form" class="space-y-6">
+        <div>
+          <label class="form-label">
+            Book Title
+            <input type="text" name="title" class="form-input" placeholder="e.g. The Great Gatsby" required>
+          </label>
+        </div>
+        <div>
+          <label class="form-label">
+            ISBN
+            <input type="text" name="isbn" class="form-input" placeholder="e.g. 978-0-7475-3269-9" required>
+          </label>
+        </div>
+        <div>
+          <label class="form-label">
+            Author
+
+            <select name="author" class="form-input" required>
+              <option value="" disabled selected>Select an author</option>
+              <option value="author1">Author 1</option>
+              <option value="author2">Author 2</option>
+              <option value="author3">Author 3</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="form-label">
+            Category
+            <select name="category" class="form-input" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="category1">Category 1</option>
+              <option value="category2">Category 2</option>
+              <option value="category3">Category 3</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="form-label">
+            Status
+            <select name="status" class="form-input" required>
+              <option value="" disabled selected>Select a status</option>
+              <option value="available">Available</option>
+              <option value="borrowed">Borrowed</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="flex justify-between space-x-3 mt-6">
+          <button type="button" id="cancel-add-book-btn"
+            class="flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-medium text-gray-700 text-sm">
+            Cancel
+          </button>
+          <button type="submit"
+            class="flex-1 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-medium text-white text-sm">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- dashboard js file -->
+  <script src="./js/dashboard.js" type="module"></script>
+
+  <!-- boom management js file -->
+  <script src="./js/book-managment.js" type="module"></script>
 </body>
 
 </html>
