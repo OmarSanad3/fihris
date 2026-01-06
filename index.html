@@ -178,7 +178,8 @@
           class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
           <div class="h-full overflow-auto">
             <table class="w-full">
-              <thead class="top-0 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+              <thead
+                class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
                 <tr>
                   <th class="th-element">Book Title</th>
                   <th class="th-element">ISBN</th>
@@ -196,6 +197,37 @@
       </section>
 
       <section id="authors-section" class="hidden section">
+        <div class="flex justify-between">
+          <div>
+            <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Authors Management</h2>
+            <p class="text-gray-600 dark:text-gray-400">10 authors</p>
+          </div>
+          <button id="open-add-author-btn"
+            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Author</span>
+          </button>
+        </div>
+
+        <div
+          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
+          <div class="h-full overflow-auto">
+            <table class="w-full">
+              <thead
+                class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+                <tr>
+                  <th class="th-element">Name</th>
+                  <th class="th-element">Nationality</th>
+                  <th class="th-element">Books</th>
+                  <th class="th-element">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="authors-table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </section>
 
       <section id="categories-section" class="hidden section">
@@ -206,6 +238,8 @@
       </section>
     </main>
   </div>
+
+  <!-- ************************************************************ Start Popups ************************************************************ -->
 
   <!-- ------------------------------- Add Book Popup ------------------------------- -->
   <div id="add-book-modal" class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
@@ -277,14 +311,72 @@
     </div>
   </div>
 
+  <!-- ------------------------------- Add Author Popup ------------------------------- -->
+  <div id="add-author-modal"
+    class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
+
+    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-semibold text-gray-800 text-xl">Add New Author</h3>
+        <button id="close-add-author-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+
+      <form id="add-author-form" class="space-y-6">
+        <div>
+          <label class="form-label">
+            Author Name
+            <input type="text" name="name" class="form-input" placeholder="e.g. F. Scott Fitzgerald" required>
+          </label>
+        </div>
+        <div>
+          <label class="form-label">
+            Nationality
+            <input type="text" name="nationality" class="form-input" placeholder="e.g. American" required>
+          </label>
+        </div>
+        <div class="flex justify-between space-x-3 mt-6">
+          <button type="button" id="cancel-add-author-btn"
+            class="flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-medium text-gray-700 text-sm">
+            Cancel
+          </button>
+          <button type="submit"
+            class="flex-1 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-medium text-white text-sm">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ------------------------------- Show Authors Books Popup ------------------------------- -->
+  <div id="show-author-books-modal"
+    class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
+
+    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-semibold text-gray-800 text-xl">Author's Books</h3>
+        <button id="close-show-author-books-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+
+      <div id="author-books-container" class="space-y-2 max-h-100 overflow-auto">
+      </div>
+    </div>
+  </div>
+
+  <!-- ************************************************************ End Popups ************************************************************ -->
+
+
   <!-- routing js file -->
   <script src="./js/ui/routing.js" type="module"></script>
 
-  <!-- dashboard js file -->
+  <!-- dashboard section js file -->
   <script src="./js/ui/dashboard.js" type="module"></script>
 
-  <!-- boom management js file -->
+  <!-- book management section js file -->
   <script src="./js/ui/book-managment.js" type="module"></script>
+
+  <!-- authors management section js file -->
+  <script src="./js/ui/authors-managment.js" type="module"></script>
 
   <!-- logic app js file (LOGIC) -->
   <script src="./js/logic/app.js" type="module"></script>
