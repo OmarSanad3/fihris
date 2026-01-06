@@ -14,7 +14,15 @@ Library.prototype.addBook = function (book) {
   if (!book || book.constructor !== Book) {
     throw new Error("Invalid book object❗❗");
   }
-  if (this.authors.find((author) => author._id === book.authorId) === undefined) {
+  if (this.books.find((b) => b._id === book._id) !== undefined) {
+    throw new Error("Book already exists❗❗");
+  }
+  if (this.books.find((b) => b.title === book.title) !== undefined) {
+    throw new Error("Another book with this title already exists❗❗");
+  }
+  if (
+    this.authors.find((author) => author._id === book.authorId) === undefined
+  ) {
     throw new Error("Author not found❗❗");
   }
   this.books.push(book);
@@ -34,10 +42,26 @@ Library.prototype.updateBook = function (bookId, bookData) {
   if (!book) {
     throw new Error("Book not found❗❗");
   }
-  if (bookData.authorId && this.authors.find((author) => author._id === bookData.authorId) === undefined) {
+  if (
+    bookData.authorId &&
+    this.authors.find((author) => author._id === bookData.authorId) ===
+      undefined
+  ) {
     throw new Error("Author not found❗❗");
   }
-  if (bookData.category && !Book.allowedCategories.includes(bookData.category)) {
+  if (bookData.title) {
+    const existingBook = this.books.find(
+      (b) => b.title === bookData.title && b._id !== bookId
+    );
+    if (existingBook) {
+      throw new Error("Another book with this title already exists❗❗");
+    }
+  }
+
+  if (
+    bookData.category &&
+    !Book.allowedCategories.includes(bookData.category)
+  ) {
     throw new Error("Invalid category❗❗");
   }
   if (bookData.status && !Book.allowedStatuses.includes(bookData.status)) {
@@ -64,34 +88,50 @@ Library.prototype.addAuthor = function (author) {
   if (!author || author.constructor !== Author) {
     throw new Error("Invalid author object❗❗");
   }
+  if (this.authors.find((a) => a._id === author._id) !== undefined) {
+    throw new Error("Author already exists❗❗");
+  }
+  if (this.authors.find((a) => a.name === author.name) !== undefined) {
+    throw new Error("Another author with this name already exists❗❗");
+  }
   this.authors.push(author);
   this.syncStorage();
-}
+};
 
 Library.prototype.getAuthors = function () {
   return this.authors;
-}
+};
 
 Library.prototype.findAuthorById = function (authorId) {
   return this.authors.find((author) => author._id === authorId);
-}
+};
 
 Library.prototype.updateAuthor = function (authorId, authorData) {
   const author = this.findAuthorById(authorId);
   if (!author) {
     throw new Error("Author not found❗❗");
   }
+  if (authorData.name) {
+    const existingAuthor = this.authors.find(
+      (a) => a.name === authorData.name && a._id !== authorId
+    );
+    if (existingAuthor) {
+      throw new Error("Another author with this name already exists❗❗");
+    }
+  }
   Object.assign(author, authorData, { _id: author._id });
   this.syncStorage();
   return author;
-}
+};
 
 Library.prototype.canRemoveAuthor = function (authorId) {
   return !this.books.some((book) => book.authorId === authorId);
-}
+};
 
 Library.prototype.removeAuthor = function (authorId) {
-  const authorIndex = this.authors.findIndex((author) => author._id === authorId);
+  const authorIndex = this.authors.findIndex(
+    (author) => author._id === authorId
+  );
   if (authorIndex !== -1) {
     if (!this.canRemoveAuthor(authorId)) {
       throw new Error("Cannot remove author with associated books❗❗");
@@ -101,10 +141,10 @@ Library.prototype.removeAuthor = function (authorId) {
     return true;
   }
   return false;
-}
+};
 
-Library.prototype.syncStorage = function() {
+Library.prototype.syncStorage = function () {
   saveLibraryData(this);
-}
+};
 
 export default Library;
