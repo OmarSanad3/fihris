@@ -28,23 +28,23 @@
         <span class="font-semibold text-gray-900 dark:text-white text-xl">Fihris</span>
       </div>
       <div class="space-y-2 p-4">
-        <button class="side-btn">
+        <button id="go-to-dashboard-section" class="side-btn" onclick="navigateTo('dashboard-section')">
           <i class="fa-solid fa-chart-simple"></i>
           <span>Dashboard</span>
         </button>
-        <button class="side-btn active">
+        <button id="go-to-books-section" class="side-btn" onclick="navigateTo('books-section')">
           <i class="fa-solid fa-book-open"></i>
           <span>Books</span>
         </button>
-        <button class="side-btn">
+        <button id="go-to-authors-section" class="side-btn" onclick="navigateTo('authors-section')">
           <i class="fa-user-group fa-solid"></i>
           <span>Authors</span>
         </button>
-        <button class="side-btn">
+        <button id="go-to-categories-section" class="side-btn" onclick="navigateTo('categories-section')">
           <i class="fa-regular fa-folder-open"></i>
           <span>Categories</span>
         </button>
-        <button class="side-btn">
+        <button id="go-to-settings-section" class="side-btn" onclick="navigateTo('settings-section')">
           <i class="fa-solid fa-gear"></i>
           <span>Settings</span>
         </button>
@@ -137,7 +137,7 @@
 
       </section>
 
-      <section id="books-section" class="section">
+      <section id="books-section" class="hidden section">
         <div class="flex justify-between">
           <div>
             <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Books Management</h2>
@@ -264,7 +264,7 @@
   </div>
 
   <!-- ------------------------------- Add Book Popup ------------------------------- -->
-  <div id="add-book-modal" class="z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
+  <div id="add-book-modal" class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
 
     <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
       <div class="flex justify-between items-center mb-4">
@@ -333,6 +333,8 @@
     </div>
   </div>
 
+  <!-- routing js file -->
+  <script src="./js/ui/routing.js" type="module"></script>
 
   <!-- dashboard js file -->
   <script src="./js/ui/dashboard.js" type="module"></script>
