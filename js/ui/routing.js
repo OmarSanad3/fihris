@@ -26,6 +26,7 @@ const [
   document.getElementById("go-to-settings-section"),
 ];
 
+const sectionTitleEle = document.getElementById("section-title");
 
 window.navigateTo = (section) => {
   (() => {
@@ -48,22 +49,27 @@ window.navigateTo = (section) => {
     case "dashboard-section":
       dashboardSectionEle.classList.remove("hidden");
       goToDashboardBtn.classList.add("active");
+      sectionTitleEle.textContent = "Dashboard";
       break;
     case "books-section":
       booksSectionEle.classList.remove("hidden");
       goToBooksBtn.classList.add("active");
+      sectionTitleEle.textContent = "Books Management";
       break;
     case "authors-section":
       authorsSectionEle.classList.remove("hidden");
       goToAuthorsBtn.classList.add("active");
+      sectionTitleEle.textContent = "Authors Management";
       break;
     case "categories-section":
       categoriesSectionEle.classList.remove("hidden");
       goToCategoriesBtn.classList.add("active");
+      sectionTitleEle.textContent = "Categories";
       break;
     case "settings-section":
       settingsSectionEle.classList.remove("hidden");
       goToSettingsBtn.classList.add("active");
+      sectionTitleEle.textContent = "Settings";
       break;
     default:
       return window.navigateTo("dashboard-section");
