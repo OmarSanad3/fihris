@@ -1,6 +1,6 @@
 import Library from "./classes/Library.js";
 import generateLibraryData from "./utils/generate-library-data.js";
-import { getLibraryData, saveLibraryData } from "./utils/library-storage.js";
+import { getLibraryData, saveLibraryData } from "../store/library-storage.js";
 
 const library = new Library();
 
