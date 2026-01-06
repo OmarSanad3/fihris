@@ -1,9 +1,31 @@
+import { library } from "../logic/app.js";
+import BookRow from "./components/BookRow.js";
+
 const addBookModal = document.getElementById("add-book-modal");
 const openAddBookBtn = document.getElementById("open-add-book-btn");
 const closeAddBookBtn = document.getElementById("close-add-book-btn");
 const cancelAddBookBtn = document.getElementById("cancel-add-book-btn");
 const addBookForm = document.getElementById("add-book-form");
 
+const booksTableBody = document.getElementById("books-table-body");
+
+/* Rendering Logic */
+(() => {
+  booksTableBody.innerHTML = "";
+  for (let i = 0; i < 10; i++) {
+    library.books.forEach((book) => {
+      const author = library.authors.find((author) => author._id === book.authorId);
+      const bookRowHTML = BookRow(
+        book.title,
+        book.isbn,
+        author.name,
+        book.category,
+        book.status
+      );
+      booksTableBody.insertAdjacentHTML("beforeend", bookRowHTML);
+    });
+  }
+})();
 
 /* ------------------------------- Add Book Form ------------------------------- */
 
