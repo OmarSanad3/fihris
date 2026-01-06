@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <div class="flex bg-gray-50 dark:bg-gray-950 min-h-screen">
+  <div class="flex bg-gray-50 dark:bg-gray-950">
     <!-- Sidebar -->
     <aside class="bg-white dark:bg-gray-900 border-gray-200 border-x dark:border-gray-800">
       <div
@@ -51,7 +51,7 @@
       </div>
     </aside>
 
-    <main class="flex flex-col flex-1">
+    <main class="flex flex-col flex-1 min-h-screen overflow-hidden">
       <header id="content-title"
         class="flex justify-between items-center bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
         <h1 id="section-title" class="text-gray-900 dark:text-white text-2xl">Dashboard</h1>
@@ -174,10 +174,11 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-          <div class="overflow-x-auto">
+        <div
+          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
+          <div class="h-full overflow-auto">
             <table class="w-full">
-              <thead class="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+              <thead class="top-0 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
                 <tr>
                   <th class="th-element">Book Title</th>
                   <th class="th-element">ISBN</th>
