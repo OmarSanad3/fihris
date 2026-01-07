@@ -43,8 +43,8 @@ window.navigateTo = (section) => {
     goToSettingsBtn.classList.remove("active");
   })();
 
-  console.log(section);
-
+  window.closeSideBar();
+  
   switch (section) {
     case "dashboard-section":
       dashboardSectionEle.classList.remove("hidden");
