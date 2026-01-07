@@ -21,13 +21,16 @@
 <body>
   <div class="flex bg-gray-50 dark:bg-gray-950">
     <!-- Sidebar -->
-    <aside class="bg-white dark:bg-gray-900 border-gray-200 border-x dark:border-gray-800">
+    <!-- class="hidden md:block left-0 z-50 lg:static fixed inset-y-0 lg:inset-0 bg-white dark:bg-gray-900 border-gray-200 border-x dark:border-gray-800 w-64 transition-transform -translate-x-full lg:translate-x-0 duration-300 ease-in-out transform" -->
+    <div id="sidebar-overlay" class="hidden lg:hidden z-40 fixed inset-0 bg-black/50"></div>
+    <aside id="sidebar"
+      class="left-0 z-50 lg:static fixed inset-y-0 lg:inset-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 border-r w-64 transition-transform -translate-x-full lg:translate-x-0 duration-300 ease-in-out transform">
       <div
         class="flex items-center gap-3 p-4 border-gray-200 dark:border-gray-800 border-b font-semibold text-gray-900 dark:text-white">
         <i class="text-blue-600 dark:text-blue-400 text-xl fa-solid fa-book"></i>
         <span class="font-semibold text-gray-900 dark:text-white text-xl">Fihris</span>
       </div>
-      <div class="space-y-2 p-4">
+      <nav class="space-y-2 p-4">
         <button id="go-to-dashboard-section" class="side-btn" onclick="navigateTo('dashboard-section')">
           <i class="fa-solid fa-chart-simple"></i>
           <span>Dashboard</span>
@@ -48,15 +51,20 @@
           <i class="fa-solid fa-gear"></i>
           <span>Settings</span>
         </button>
-      </div>
+      </nav>
     </aside>
 
-    <main class="flex flex-col flex-1 min-h-screen overflow-hidden">
+    <main class="flex flex-col flex-1 w-full min-h-screen">
       <header id="content-title"
-        class="flex justify-between items-center bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
-        <h1 id="section-title" class="text-gray-900 dark:text-white text-2xl">Dashboard</h1>
+        class="top-0 sticky flex justify-between items-center bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
         <div class="flex justify-between items-center gap-3">
-          <div class="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+          <button id="menu-toggle" class="lg:hidden p-4 text-gray-600">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h1 id="section-title" class="font-semibold text-gray-900 dark:text-white text-xl md:text-2xl">Dashboard</h1>
+        </div>
+        <div class="flex justify-between items-center gap-3">
+          <div class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
             <button
               class="bg-white dark:bg-gray-700 shadow-sm px-3 py-1.5 rounded-md text-gray-900 dark:text-white transition-colors">
               En
@@ -67,7 +75,7 @@
             </button>
           </div>
           <button
-            class="flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
+            class="hidden md:flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
             <i class="text-xl fa-solid fa-moon"></i>
           </button>
           <button
@@ -80,162 +88,163 @@
           </button>
         </div>
       </header>
+      <div class="flex-1 overflow-hidden">
+        <section id="dashboard-section" class="hidden section">
+          <div class="flex flex-wrap gap-6">
+            <div
+              class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="flex flex-col">
+                <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+                <p class="text-gray-900 dark:text-white">10</p>
+              </div>
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+              </div>
+            </div>
+            <div
+              class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="flex flex-col">
+                <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+                <p class="text-gray-900 dark:text-white">10</p>
+              </div>
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+              </div>
+            </div>
+            <div
+              class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="flex flex-col">
+                <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+                <p class="text-gray-900 dark:text-white">10</p>
+              </div>
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+              </div>
+            </div>
+            <div
+              class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="flex flex-col">
+                <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
+                <p class="text-gray-900 dark:text-white">10</p>
+              </div>
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center lg:justify-between gap-6 w-full">
+            <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
+              <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Books per Category</h2>
+              <canvas id="bookPerCategory"></canvas>
+            </div>
+            <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
+              <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Borrowed vs Available</h2>
+              <canvas id="borrowedVSAvailable"></canvas>
+            </div>
+          </div>
 
-      <section id="dashboard-section" class="hidden section">
-        <div class="flex flex-wrap gap-6">
+        </section>
+
+        <section id="books-section" class="hidden section">
+          <div class="flex justify-between">
+            <div>
+              <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Books Management</h2>
+              <p class="text-gray-600 dark:text-gray-400">10 books</p>
+            </div>
+            <button id="open-add-book-btn"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add New Book</span>
+            </button>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 mb-6 p-4 border border-gray-200 dark:border-gray-700 rounded-xl">
+            <div class="flex lg:flex-row flex-col gap-4">
+              <div class="relative flex-1">
+                <i class="top-1/2 left-3 absolute text-gray-500 -translate-y-1/2 transform fa-solid fa-search"></i>
+                <input type="search"
+                  class="bg-gray-50 dark:bg-gray-900 py-2 pr-4 pl-10 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-gray-900 dark:text-white placeholder-gray-500"
+                  placeholder="Search for books...">
+              </div>
+              <select name="category" id="select-category" class="selection-element">
+                <option value="all" selected>All Categories</option>
+                <option value="fiction">Fiction</option>
+                <option value="non-fiction">Non-Fiction</option>
+                <option value="science">Science</option>
+                <option value="history">History</option>
+                <option value="biography">Biography</option>
+              </select>
+              <select name="status" id="select-status" class="selection-element">
+                <option value="all" selected>All Statuses</option>
+                <option value="available">Available</option>
+                <option value="borrowed">Borrowed</option>
+              </select>
+            </div>
+          </div>
+
           <div
-            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-            <div class="flex flex-col">
-              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
-              <p class="text-gray-900 dark:text-white">10</p>
-            </div>
-            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
+            <div class="h-full overflow-auto">
+              <table class="w-full">
+                <thead
+                  class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+                  <tr>
+                    <th class="th-element">Book Title</th>
+                    <th class="th-element">ISBN</th>
+                    <th class="th-element">Author</th>
+                    <th class="th-element">Category</th>
+                    <th class="th-element">Status</th>
+                    <th class="th-element">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="books-table-body"> </tbody>
+              </table>
             </div>
           </div>
+
+        </section>
+
+        <section id="authors-section" class="hidden section">
+          <div class="flex justify-between">
+            <div>
+              <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Authors Management</h2>
+              <p class="text-gray-600 dark:text-gray-400">10 authors</p>
+            </div>
+            <button id="open-add-author-btn"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add New Author</span>
+            </button>
+          </div>
+
           <div
-            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-            <div class="flex flex-col">
-              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
-              <p class="text-gray-900 dark:text-white">10</p>
-            </div>
-            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
-            </div>
-          </div>
-          <div
-            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-            <div class="flex flex-col">
-              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
-              <p class="text-gray-900 dark:text-white">10</p>
-            </div>
-            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
+            class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
+            <div class="h-full overflow-auto">
+              <table class="w-full">
+                <thead
+                  class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
+                  <tr>
+                    <th class="th-element">Name</th>
+                    <th class="th-element">Nationality</th>
+                    <th class="th-element">Books</th>
+                    <th class="th-element">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="authors-table-body">
+                </tbody>
+              </table>
             </div>
           </div>
-          <div
-            class="flex flex-1 justify-between items-center gap-10 bg-white dark:bg-gray-800 p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-            <div class="flex flex-col">
-              <p class="mb-1 text-gray-600 dark:text-gray-400">Total Books</p>
-              <p class="text-gray-900 dark:text-white">10</p>
-            </div>
-            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-              <i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-book-open"></i>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-wrap justify-center lg:justify-between gap-6 w-full">
-          <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
-            <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Books per Category</h2>
-            <canvas id="bookPerCategory"></canvas>
-          </div>
-          <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
-            <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Borrowed vs Available</h2>
-            <canvas id="borrowedVSAvailable"></canvas>
-          </div>
-        </div>
 
-      </section>
+        </section>
 
-      <section id="books-section" class="hidden section">
-        <div class="flex justify-between">
-          <div>
-            <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Books Management</h2>
-            <p class="text-gray-600 dark:text-gray-400">10 books</p>
-          </div>
-          <button id="open-add-book-btn"
-            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
-            <i class="fa-solid fa-plus"></i>
-            <span>Add New Book</span>
-          </button>
-        </div>
+        <section id="categories-section" class="hidden section">
 
-        <div class="bg-white dark:bg-gray-800 mb-6 p-4 border border-gray-200 dark:border-gray-700 rounded-xl">
-          <div class="flex lg:flex-row flex-col gap-4">
-            <div class="relative flex-1">
-              <i class="top-1/2 left-3 absolute text-gray-500 -translate-y-1/2 transform fa-solid fa-search"></i>
-              <input type="search"
-                class="bg-gray-50 dark:bg-gray-900 py-2 pr-4 pl-10 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-gray-900 dark:text-white placeholder-gray-500"
-                placeholder="Search for books...">
-            </div>
-            <select name="category" id="select-category" class="selection-element">
-              <option value="all" selected>All Categories</option>
-              <option value="fiction">Fiction</option>
-              <option value="non-fiction">Non-Fiction</option>
-              <option value="science">Science</option>
-              <option value="history">History</option>
-              <option value="biography">Biography</option>
-            </select>
-            <select name="status" id="select-status" class="selection-element">
-              <option value="all" selected>All Statuses</option>
-              <option value="available">Available</option>
-              <option value="borrowed">Borrowed</option>
-            </select>
-          </div>
-        </div>
+        </section>
 
-        <div
-          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
-          <div class="h-full overflow-auto">
-            <table class="w-full">
-              <thead
-                class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
-                <tr>
-                  <th class="th-element">Book Title</th>
-                  <th class="th-element">ISBN</th>
-                  <th class="th-element">Author</th>
-                  <th class="th-element">Category</th>
-                  <th class="th-element">Status</th>
-                  <th class="th-element">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="books-table-body"> </tbody>
-            </table>
-          </div>
-        </div>
-
-      </section>
-
-      <section id="authors-section" class="hidden section">
-        <div class="flex justify-between">
-          <div>
-            <h2 class="mb-1 text-gray-900 dark:text-white text-xl">Authors Management</h2>
-            <p class="text-gray-600 dark:text-gray-400">10 authors</p>
-          </div>
-          <button id="open-add-author-btn"
-            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors cursor-pointer">
-            <i class="fa-solid fa-plus"></i>
-            <span>Add New Author</span>
-          </button>
-        </div>
-
-        <div
-          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg h-130 overflow-hidden">
-          <div class="h-full overflow-auto">
-            <table class="w-full">
-              <thead
-                class="top-0 z-10 sticky bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b">
-                <tr>
-                  <th class="th-element">Name</th>
-                  <th class="th-element">Nationality</th>
-                  <th class="th-element">Books</th>
-                  <th class="th-element">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="authors-table-body">
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </section>
-
-      <section id="categories-section" class="hidden section">
-
-      </section>
-
-      <section id="settings-section" class="hidden section">
-      </section>
+        <section id="settings-section" class="hidden section">
+        </section>
+      </div>
     </main>
   </div>
 
@@ -368,6 +377,9 @@
 
   <!-- routing js file -->
   <script src="./js/ui/routing.js" type="module"></script>
+
+  <!-- responsive sidebar file -->
+  <script src="./js/ui/utils/responsive-side-bar.js" type="module"></script>
 
   <!-- dashboard section js file -->
   <script src="./js/ui/dashboard.js" type="module"></script>
