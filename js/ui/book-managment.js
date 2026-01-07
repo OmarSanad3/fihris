@@ -41,11 +41,10 @@ const filteringBookData = {
 
 /* ------------------------------- Rendering Logic ------------------------------- */
 
-const render = () => {
+(() => {
   renderBookTable();
   renderSelectElements();
-};
-render();
+})();
 
 function renderBookTable() {
   const passSearch = (bookTitle, bookISBN) => {
@@ -158,26 +157,30 @@ function renderSelectEditElements(bookId, author, category, status) {
 /* ------------------------------- Add Book Form ------------------------------- */
 
 addBookForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+  try {
+    event.preventDefault();
 
-  const formData = new FormData(addBookForm);
+    const formData = new FormData(addBookForm);
 
-  const title = formData.get("title");
-  const isbn = formData.get("isbn");
-  const authorId = formData.get("author");
-  const category = formData.get("category");
-  const status = formData.get("status");
+    const title = formData.get("title");
+    const isbn = formData.get("isbn");
+    const authorId = formData.get("author");
+    const category = formData.get("category");
+    const status = formData.get("status");
 
-  // console.log("New Book Added:", { title, isbn, authorId, category, status });
+    // console.log("New Book Added:", { title, isbn, authorId, category, status });
 
-  const newBook = new Book(title, isbn, authorId, category, status);
-  library.addBook(newBook);
+    const newBook = new Book(title, isbn, authorId, category, status);
+    library.addBook(newBook);
 
-  render();
+    renderBookTable();
 
-  addBookModal.classList.remove("flex");
-  addBookModal.classList.add("hidden");
-  addBookForm.reset();
+    addBookModal.classList.remove("flex");
+    addBookModal.classList.add("hidden");
+    addBookForm.reset();
+  } catch (err) {
+    window.alert(err.message);
+  }
 });
 
 openAddBookBtn.addEventListener("click", () => {
@@ -207,22 +210,29 @@ addBookModal.addEventListener("click", (event) => {
 
 searchBookFilterEle.addEventListener("input", (event) => {
   filteringBookData.search = norm(event.target.value);
-  render();
+  renderBookTable();
 });
 
 selectCategoryFilterEle.addEventListener("change", (event) => {
   filteringBookData.category = norm(event.target.value);
-  render();
+  renderBookTable();
 });
 
 selectStatusFilterEle.addEventListener("change", (event) => {
   filteringBookData.status = norm(event.target.value);
-  render();
+  renderBookTable();
 });
 
 /* ------------------------------- Edit a Book ------------------------------- */
 
+function disableEditingInAllRow() {
+  document
+    .querySelectorAll("#books-table-body tr")
+    .forEach((ele) => (ele.dataset["editing"] = "false"));
+}
+
 window.editBook = (rowId) => {
+  disableEditingInAllRow();
   const bookId = rowId.split("-").splice(2, 1000).join("-");
   const book = library.books.find((book) => book._id === bookId);
 
@@ -250,7 +260,7 @@ window.editBook = (rowId) => {
     if (status) updatedBook.status = status;
 
     library.updateBook(bookId, updatedBook);
-    render();
+    renderBookTable();
 
     document.getElementById(rowId).dataset.editing = "false";
   });
@@ -259,11 +269,11 @@ window.editBook = (rowId) => {
 window.cancelBook = (rowId) => {
   // const bookId = rowId.split("-").splice(2, 1000).join("-");
   document.getElementById(rowId).dataset.editing = "false";
-  render();
+  renderBookTable();
 };
 
 window.deleteBook = (rowId) => {
   const bookId = rowId.split("-").splice(2, 1000).join("-");
   library.removeBook(bookId);
-  render();
+  renderBookTable();
 };
