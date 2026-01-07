@@ -112,9 +112,9 @@ function renderSelectElements() {
   });
 }
 
-function renderSelectEditElements(bookId, author, category, status) {
+function renderSelectEditElements(bookId, authorId, category, status) {
   const editingModeSelectValues = {
-    author,
+    authorId,
     category,
     status,
   };
@@ -147,7 +147,7 @@ function renderSelectEditElements(bookId, author, category, status) {
 
   library.authors.forEach((author) => {
     let opt = `<option value="${author._id}">${author.name}</option>`;
-    if (editingModeSelectValues.author === author) {
+    if (editingModeSelectValues.authorId === author._id) {
       opt = `<option value="${author._id}" selected>${author.name}</option>`;
     }
     selectAuthorEditBookEle.insertAdjacentHTML("beforeend", opt);
@@ -238,31 +238,35 @@ window.editBook = (rowId) => {
 
   document.getElementById(rowId).dataset.editing = "true";
 
-  renderSelectEditElements(bookId, book.author, book.category, book.status);
+  renderSelectEditElements(bookId, book.authorId, book.category, book.status);
 
   const editBookForm = document.getElementById(`form-${bookId}`);
   editBookForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const formData = new FormData(editBookForm);
+      const formData = new FormData(editBookForm);
 
-    const title = formData.get("title");
-    const isbn = formData.get("isbn");
-    const authorId = formData.get("author");
-    const category = formData.get("category");
-    const status = formData.get("status");
+      const title = formData.get("title");
+      const isbn = formData.get("isbn");
+      const authorId = formData.get("author");
+      const category = formData.get("category");
+      const status = formData.get("status");
 
-    const updatedBook = {};
-    if (title) updatedBook.title = title;
-    if (isbn) updatedBook.isbn = isbn;
-    if (authorId) updatedBook.authorId = authorId;
-    if (category) updatedBook.category = category;
-    if (status) updatedBook.status = status;
+      const updatedBook = {};
+      if (title) updatedBook.title = title;
+      if (isbn) updatedBook.isbn = isbn;
+      if (authorId) updatedBook.authorId = authorId;
+      if (category) updatedBook.category = category;
+      if (status) updatedBook.status = status;
 
-    library.updateBook(bookId, updatedBook);
-    renderBookTable();
+      library.updateBook(bookId, updatedBook);
+      renderBookTable();
 
-    document.getElementById(rowId).dataset.editing = "false";
+      document.getElementById(rowId).dataset.editing = "false";
+    } catch (err) {
+      window.alert(err.message);
+    }
   });
 };
 
