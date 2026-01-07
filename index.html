@@ -162,22 +162,17 @@
             <div class="flex lg:flex-row flex-col gap-4">
               <div class="relative flex-1">
                 <i class="top-1/2 left-3 absolute text-gray-500 -translate-y-1/2 transform fa-solid fa-search"></i>
-                <input type="search"
+                <input
+                  id="search-book-filter"
+                type="search"
                   class="bg-gray-50 dark:bg-gray-900 py-2 pr-4 pl-10 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-gray-900 dark:text-white placeholder-gray-500"
                   placeholder="Search for books...">
               </div>
-              <select name="category" id="select-category" class="selection-element">
+              <select name="category" id="select-category-filter" class="selection-element">
                 <option value="all" selected>All Categories</option>
-                <option value="fiction">Fiction</option>
-                <option value="non-fiction">Non-Fiction</option>
-                <option value="science">Science</option>
-                <option value="history">History</option>
-                <option value="biography">Biography</option>
               </select>
-              <select name="status" id="select-status" class="selection-element">
+              <select name="status" id="select-status-filter" class="selection-element">
                 <option value="all" selected>All Statuses</option>
-                <option value="available">Available</option>
-                <option value="borrowed">Borrowed</option>
               </select>
             </div>
           </div>
@@ -275,33 +270,24 @@
         <div>
           <label class="form-label">
             Author
-
-            <select name="author" class="form-input" required>
+            <select id="select-author-add-book" name="author" class="form-input" required>
               <option value="" disabled selected>Select an author</option>
-              <option value="author1">Author 1</option>
-              <option value="author2">Author 2</option>
-              <option value="author3">Author 3</option>
             </select>
           </label>
         </div>
         <div>
           <label class="form-label">
             Category
-            <select name="category" class="form-input" required>
+            <select id="select-category-add-book" name="category" class="form-input" required>
               <option value="" disabled selected>Select a category</option>
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
             </select>
           </label>
         </div>
         <div>
           <label class="form-label">
             Status
-            <select name="status" class="form-input" required>
+            <select id="select-status-add-book" name="status" class="form-input" required>
               <option value="" disabled selected>Select a status</option>
-              <option value="available">Available</option>
-              <option value="borrowed">Borrowed</option>
             </select>
           </label>
         </div>

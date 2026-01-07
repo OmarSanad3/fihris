@@ -1,18 +1,18 @@
-const allowedStatuses = ["Available", "Borrowed"];
-const allowedCategories = [
-  "Fiction",
-  "Non-Fiction",
-  "Science",
-  "History",
-  "Biography",
-  "Technology",
+export const allowedStatuses = ["available", "borrowed"];
+export const allowedCategories = [
+  "fiction",
+  "non-fiction",
+  "science",
+  "history",
+  "biography",
+  "technology",
 ];
 
 function Book(title, isbn, authorId, category, status) {
-  if (!allowedCategories.includes(category)) {
+  if (!allowedCategories.includes(category.toLowerCase())) {
     throw new Error("Invalid category❗❗");
   }
-  if (!allowedStatuses.includes(status)) {
+  if (!allowedStatuses.includes(status.toLowerCase())) {
     throw new Error("Invalid status❗❗");
   }
 
