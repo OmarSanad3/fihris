@@ -82,9 +82,11 @@ function renderBookTable() {
     }
 
     const bookRowHTML = BookRow(
+      book._id,
       book.title,
       book.isbn,
       author.name,
+      author._id,
       book.category,
       book.status
     );
@@ -94,20 +96,62 @@ function renderBookTable() {
 
 function renderSelectElements() {
   allowedCategories.forEach((cat) => {
-    const opt = `<option value="${cat.toLowerCase()}">${cat}</option>`;
+    let opt = `<option value="${cat.toLowerCase()}">${cat}</option>`;
     selectCategoryFilterEle.insertAdjacentHTML("beforeend", opt);
     selectCategoryAddBookEle.insertAdjacentHTML("beforeend", opt);
   });
 
   allowedStatuses.forEach((status) => {
-    const opt = `<option value="${status.toLowerCase()}">${status}</option>`;
+    let opt = `<option value="${status.toLowerCase()}">${status}</option>`;
     selectStatusFilterEle.insertAdjacentHTML("beforeend", opt);
     selectStatusAddBookEle.insertAdjacentHTML("beforeend", opt);
   });
 
   library.authors.forEach((author) => {
-    const opt = `<option value="${author._id}">${author.name}</option>`;
+    let opt = `<option value="${author._id}">${author.name}</option>`;
     selectAuthorAddBookEle.insertAdjacentHTML("beforeend", opt);
+  });
+}
+
+function renderSelectEditElements(bookId, author, category, status) {
+  const editingModeSelectValues = {
+    author,
+    category,
+    status,
+  };
+
+  const [
+    selectAuthorEditBookEle,
+    selectCategoryEditBookEle,
+    selectStatusEditBookEle,
+  ] = [
+    document.getElementById(`select-author-edit-book-${bookId}`),
+    document.getElementById(`select-category-edit-book-${bookId}`),
+    document.getElementById(`select-status-edit-book-${bookId}`),
+  ];
+
+  allowedCategories.forEach((cat) => {
+    let opt = `<option value="${cat.toLowerCase()}">${cat}</option>`;
+    if (editingModeSelectValues.category === cat) {
+      opt = `<option value="${cat.toLowerCase()}" selected>${cat}</option>`;
+    }
+    selectCategoryEditBookEle.insertAdjacentHTML("beforeend", opt);
+  });
+
+  allowedStatuses.forEach((status) => {
+    let opt = `<option value="${status.toLowerCase()}">${status}</option>`;
+    if (editingModeSelectValues.status === status) {
+      opt = `<option value="${status.toLowerCase()}" selected>${status}</option>`;
+    }
+    selectStatusEditBookEle.insertAdjacentHTML("beforeend", opt);
+  });
+
+  library.authors.forEach((author) => {
+    let opt = `<option value="${author._id}">${author.name}</option>`;
+    if (editingModeSelectValues.author === author) {
+      opt = `<option value="${author._id}" selected>${author.name}</option>`;
+    }
+    selectAuthorEditBookEle.insertAdjacentHTML("beforeend", opt);
   });
 }
 
@@ -175,3 +219,51 @@ selectStatusFilterEle.addEventListener("change", (event) => {
   filteringBookData.status = norm(event.target.value);
   render();
 });
+
+/* ------------------------------- Edit a Book ------------------------------- */
+
+window.editBook = (rowId) => {
+  const bookId = rowId.split("-").splice(2, 1000).join("-");
+  const book = library.books.find((book) => book._id === bookId);
+
+  document.getElementById(rowId).dataset.editing = "true";
+
+  renderSelectEditElements(bookId, book.author, book.category, book.status);
+
+  const editBookForm = document.getElementById(`form-${bookId}`);
+  editBookForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(editBookForm);
+
+    const title = formData.get("title");
+    const isbn = formData.get("isbn");
+    const authorId = formData.get("author");
+    const category = formData.get("category");
+    const status = formData.get("status");
+
+    const updatedBook = {};
+    if (title) updatedBook.title = title;
+    if (isbn) updatedBook.isbn = isbn;
+    if (authorId) updatedBook.authorId = authorId;
+    if (category) updatedBook.category = category;
+    if (status) updatedBook.status = status;
+
+    library.updateBook(bookId, updatedBook);
+    render();
+
+    document.getElementById(rowId).dataset.editing = "false";
+  });
+};
+
+window.cancelBook = (rowId) => {
+  // const bookId = rowId.split("-").splice(2, 1000).join("-");
+  document.getElementById(rowId).dataset.editing = "false";
+  render();
+};
+
+window.deleteBook = (rowId) => {
+  const bookId = rowId.split("-").splice(2, 1000).join("-");
+  library.removeBook(bookId);
+  render();
+};
