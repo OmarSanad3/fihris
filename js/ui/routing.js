@@ -1,5 +1,5 @@
-import { render as renderBooksPage } from "../ui/book-managment.js";
-import {render as renderAuthorsPage} from "../ui/authors-managment.js"
+import { render as renderBooksPage } from "./book-management.js";
+import {render as renderAuthorsPage} from "./authors-management.js"
 import {render as renderCategoriesPage} from "../ui/categories-section.js"
 
 const [
