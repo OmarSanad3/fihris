@@ -1,3 +1,4 @@
+import { library } from "../logic/app.js";
 import AuthorBookRow from "./components/AuthorBookRow.js";
 import AuthorRow from "./components/AuthorRow.js";
 
@@ -13,31 +14,28 @@ const showAuthorBooksModal = document.getElementById("show-author-books-modal");
 const closeShowAuthorBooksBtn = document.getElementById(
   "close-show-author-books-btn"
 );
-const authorBooksContainer = document.getElementById(
-  "author-books-container"
-);
+const authorBooksContainer = document.getElementById("author-books-container");
 
 const authorsTableBody = document.getElementById("authors-table-body");
 
 /* Rendering Logic */
 
-(() => {
+const render = () => {
   authorsTableBody.innerHTML = "";
-  for (let i = 0; i < 10; i++) {
-    library.authors.forEach((author) => {
-      const authorsBooks = library.books.filter(
-        (book) => book.authorId === author._id
-      );
-      const authorRowHTML = AuthorRow(
-        author._id,
-        author.name,
-        author.nationality,
-        authorsBooks.length
-      );
-      authorsTableBody.innerHTML += authorRowHTML;
-    });
-  }
-})();
+  library.authors.forEach((author) => {
+    const authorsBooks = library.books.filter(
+      (book) => book.authorId === author._id
+    );
+    const authorRowHTML = AuthorRow(
+      author._id,
+      author.name,
+      author.nationality,
+      authorsBooks.length
+    );
+    authorsTableBody.innerHTML += authorRowHTML;
+  });
+};
+render();
 
 /* ------------------------------- Add Author Modal EventListeners ------------------------------- */
 
@@ -93,12 +91,10 @@ window.openAuthorBooksModal = (authorId) => {
 
   authorBooksContainer.innerHTML = "";
 
-  for (let i = 0; i < 20; i++) {
-    authorsBooks.forEach((book) => {
-      const authorBookRowHTML = AuthorBookRow(book.title, book.isbn, book.status);
-      authorBooksContainer.innerHTML += authorBookRowHTML;
-    });
-  }
+  authorsBooks.forEach((book) => {
+    const authorBookRowHTML = AuthorBookRow(book.title, book.isbn, book.status);
+    authorBooksContainer.innerHTML += authorBookRowHTML;
+  });
 };
 
 closeShowAuthorBooksBtn.addEventListener("click", () => {
@@ -112,3 +108,56 @@ showAuthorBooksModal.addEventListener("click", (event) => {
     showAuthorBooksModal.classList.add("hidden");
   }
 });
+
+/* ------------------------------- Edit an author ------------------------------- */
+
+function disableEditingInAllRow() {
+  document
+    .querySelectorAll("#authors-table-body tr")
+    .forEach((ele) => (ele.dataset["editing"] = "false"));
+}
+
+window.editAuthor = (rowId) => {
+  disableEditingInAllRow();
+  const authorId = rowId.split("-").splice(2, 1000).join("-");
+
+  document.getElementById(rowId).dataset.editing = "true";
+
+  const editAuthorForm = document.getElementById(`form-${authorId}`);
+  editAuthorForm.addEventListener("submit", (event) => {
+    try {
+      event.preventDefault();
+
+      const formData = new FormData(editAuthorForm);
+
+      const name = formData.get("name");
+      const nationality = formData.get("nationality");
+
+      const updatedAuthor = {};
+      if (name) updatedAuthor.name = name;
+      if (nationality) updatedAuthor.nationality = nationality;
+
+      library.updateAuthor(authorId, updatedAuthor);
+      render();
+
+      document.getElementById(rowId).dataset.editing = "false";
+    } catch (err) {
+      window.alert(err.message);
+    }
+  });
+};
+
+window.cancelAuthor = (rowId) => {
+  document.getElementById(rowId).dataset.editing = "false";
+  render();
+};
+
+window.deleteAuthor = (rowId) => {
+  try {
+    const authorId = rowId.split("-").splice(2, 1000).join("-");
+    library.removeAuthor(authorId);
+    render();
+  } catch (err) {
+    window.alert(err.message);
+  }
+};
