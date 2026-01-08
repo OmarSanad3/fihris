@@ -12,6 +12,8 @@ const dashboardStatsContainer = document.getElementById(
 const ctx = document.getElementById("bookPerCategory").getContext("2d");
 const ctx2 = document.getElementById("borrowedVSAvailable").getContext("2d");
 
+let chart1 = null, chart2 = null;
+
 const statsStyle = [
   {
     icon: `<i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-swatchbook"></i>`,
@@ -66,7 +68,11 @@ function buildChart1() {
     ? "rgba(255, 255, 255, 0.1)"
     : "rgba(0, 0, 0, 0.05)";
 
-  new Chart(ctx, {
+  if (chart1) {
+    chart1.destroy();
+  }
+
+  chart1 = new Chart(ctx, {
     type: "bar",
     data: {
       labels: categoriesNames,
@@ -127,13 +133,18 @@ function buildChart1() {
   });
 }
 
+
 function buildChart2() {
   const { categoriesNames, booksPerCategory } = calcDiagram2sData();
 
   const isDarkMode = document.documentElement.classList.contains("dark");
   const textColor = isDarkMode ? "#f8fafc" : "#1e293b"; // slate-50 and slate-800
 
-  new Chart(ctx2, {
+  if (chart2) {
+    chart2.destroy();
+  }
+
+  chart2 = new Chart(ctx2, {
     type: "pie", // Change this to 'line' or 'pie' to see magic happen
     data: {
       labels: categoriesNames,
