@@ -1,9 +1,17 @@
-import { calcStatsForDashboard } from "../ui/utils/statistics.js";
+import {
+  calcCategoriesStats,
+  calcDiagram1sData,
+  calcDiagram2sData,
+  calcStatsForDashboard,
+} from "../ui/utils/statistics.js";
 import Stats from "./components/Stats.js";
 
 const dashboardStatsContainer = document.getElementById(
   "dashboard-stats-container"
 );
+
+const ctx = document.getElementById("bookPerCategory").getContext("2d");
+const ctx2 = document.getElementById("borrowedVSAvailable").getContext("2d");
 
 const statsStyle = [
   {
@@ -24,133 +32,141 @@ const statsStyle = [
   },
 ];
 
-const statsData = calcStatsForDashboard();
+const categories = ["Fiction", "Sci-Fi", "History", "Cooking", "Mystery"];
+const bookCounts = [12, 19, 7, 5, 14];
 
 const render = () => {
+  const statsData = calcStatsForDashboard();
+
   dashboardStatsContainer.innerHTML = "";
   for (let i = 0; i < 4; i++) {
-    dashboardStatsContainer.insertAdjacentHTML("beforeend", Stats(
-      statsData[i].title,
-      statsStyle[i].icon,
-      statsStyle[i].iconBgColor,
-      statsData[i].value
-    ));
+    dashboardStatsContainer.insertAdjacentHTML(
+      "beforeend",
+      Stats(
+        statsData[i].title,
+        statsStyle[i].icon,
+        statsStyle[i].iconBgColor,
+        statsData[i].value
+      )
+    );
   }
+
+  buildChart1();
+  buildChart2();
 };
 render();
 
 /* ---------------- Diagrams ---------------- */
-// 1. Define your data
-const categories = ["Fiction", "Sci-Fi", "History", "Cooking", "Mystery"];
-const bookCounts = [12, 19, 7, 5, 14];
-
-// 2. Get the context of the canvas
-const ctx = document.getElementById("bookPerCategory").getContext("2d");
-const ctx2 = document.getElementById("borrowedVSAvailable").getContext("2d");
-
 // 3. Initialize the Chart
-new Chart(ctx, {
-  type: "bar", // Change this to 'line' or 'pie' to see magic happen
-  data: {
-    labels: categories,
-    datasets: [
-      {
-        label: "# of Books",
-        data: bookCounts,
-        backgroundColor: [
-          "rgba(99, 102, 241, 0.5)", // Indigo
-          "rgba(20, 184, 166, 0.5)", // Teal
-          "rgba(245, 158, 11, 0.5)", // Amber
-          "rgba(239, 68, 68, 0.5)", // Red
-          "rgba(168, 85, 247, 0.5)", // Purple
-        ],
-        borderColor: [
-          "rgb(99, 102, 241)",
-          "rgb(20, 184, 166)",
-          "rgb(245, 158, 11)",
-          "rgb(239, 68, 68)",
-          "rgb(168, 85, 247)",
-        ],
-        borderWidth: 2,
-        borderRadius: 6, // Rounds the top of the bars
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false, // Allows it to follow our Tailwind height
-    scales: {
-      y: {
-        beginAtZero: true,
-        grid: {
-          display: true,
-          color: "rgba(0, 0, 0, 0.05)", // Makes the lines very subtle
-          drawBorder: false, // Removes the solid line on the far left
-        },
-      },
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: false, // Hides the "label" box since our title is in HTML
-      },
-    },
-  },
-});
 
-new Chart(ctx2, {
-  type: "bar", // Change this to 'line' or 'pie' to see magic happen
-  data: {
-    labels: categories,
-    datasets: [
-      {
-        label: "# of Books",
-        data: bookCounts,
-        backgroundColor: [
-          "rgba(99, 102, 241, 0.5)", // Indigo
-          "rgba(20, 184, 166, 0.5)", // Teal
-          "rgba(245, 158, 11, 0.5)", // Amber
-          "rgba(239, 68, 68, 0.5)", // Red
-          "rgba(168, 85, 247, 0.5)", // Purple
-        ],
-        borderColor: [
-          "rgb(99, 102, 241)",
-          "rgb(20, 184, 166)",
-          "rgb(245, 158, 11)",
-          "rgb(239, 68, 68)",
-          "rgb(168, 85, 247)",
-        ],
-        borderWidth: 2,
-        borderRadius: 6, // Rounds the top of the bars
+function buildChart1() {
+  const { categoriesNames, booksPerCategory } = calcDiagram1sData();
+
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
+  // Color variables for readability
+  const labelColor = isDarkMode ? "#94a3b8" : "#64748b"; // slate-400 : slate-500
+  const gridColor = isDarkMode
+    ? "rgba(255, 255, 255, 0.1)"
+    : "rgba(0, 0, 0, 0.05)";
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: categoriesNames,
+      datasets: [
+        {
+          label: "# of Books",
+          data: booksPerCategory,
+          backgroundColor: [
+            "#155DFC",
+            "#9810FA",
+            "#00A63E",
+            "#F54A00",
+            "#E60076",
+            "#0092B8",
+          ],
+          borderRadius: 6,
+          borderWidth: 0, // Borders usually look messy on modern bars
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          border: { display: false }, // Hides the axis line
+          ticks: {
+            color: labelColor, // Updates numbers on Y axis
+            padding: 10,
+          },
+          grid: {
+            color: gridColor,
+            drawTicks: false, // Cleaner look
+          },
+        },
+        x: {
+          border: { display: false },
+          ticks: {
+            color: labelColor, // Updates category names on X axis
+          },
+          grid: {
+            display: false,
+          },
+        },
       },
-    ],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false, // Allows it to follow our Tailwind height
-    scales: {
-      y: {
-        beginAtZero: true,
-        grid: {
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: isDarkMode ? "#1e293b" : "#ffffff",
+          titleColor: isDarkMode ? "#ffffff" : "#1e293b",
+          bodyColor: isDarkMode ? "#cbd5e1" : "#475569",
+          borderColor: isDarkMode ? "#334155" : "#e2e8f0",
+          borderWidth: 1,
+        },
+      },
+    },
+  });
+}
+
+function buildChart2() {
+  const { categoriesNames, booksPerCategory } = calcDiagram2sData();
+
+  const isDarkMode = document.documentElement.classList.contains("dark");
+  const textColor = isDarkMode ? "#f8fafc" : "#1e293b"; // slate-50 and slate-800
+
+  new Chart(ctx2, {
+    type: "pie", // Change this to 'line' or 'pie' to see magic happen
+    data: {
+      labels: categoriesNames,
+      datasets: [
+        {
+          label: "# of Books",
+          data: booksPerCategory,
+          backgroundColor: ["#00A63E", "#F54A00"],
+          borderColor: ["#00A63E", "#F54A00"],
+          // borderWidth: 2,
+          // borderColor: isDarkMode ? "#030712" : "#ffffff",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
           display: true,
-          color: "rgba(0, 0, 0, 0.05)", // Makes the lines very subtle
-          drawBorder: false, // Removes the solid line on the far left
-        },
-      },
-      x: {
-        grid: {
-          display: false,
+          position: "bottom",
+          labels: {
+            color: textColor,
+            font: {
+              size: 14,
+            },
+          },
         },
       },
     },
-    plugins: {
-      legend: {
-        display: false, // Hides the "label" box since our title is in HTML
-      },
-    },
-  },
-});
+  });
+}

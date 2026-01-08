@@ -21,7 +21,9 @@ export const calcStatsForDashboard = () => {
   const books = library.books;
   stats.totalBooks = books.length;
   stats.totalAuthors = library.authors.length;
-  stats.availableBooks = books.filter((book) => book.status === "available").length;
+  stats.availableBooks = books.filter(
+    (book) => book.status === "available"
+  ).length;
   stats.borrowedBooks = stats.totalBooks - stats.availableBooks;
 
   return [
@@ -43,3 +45,20 @@ export const calcStatsForDashboard = () => {
     },
   ];
 };
+
+export const calcDiagram1sData = () => {
+  const categoriesNames = allowedCategories;
+  const booksPerCategory = categoriesNames.map(
+    (cat) => library.books.filter((book) => book.category === cat).length
+  );
+  return {categoriesNames, booksPerCategory};
+};
+
+export const calcDiagram2sData = () => {
+  const availableBooks = library.getBooks().filter(book => book.status === "available").length;
+  const borrowedBooks = library.getBooks().filter(book => book.status === "borrowed").length;
+  return {
+    categoriesNames: ["Available Books", "Borrowed Books"],
+    booksPerCategory: [availableBooks, borrowedBooks]
+  }
+}
