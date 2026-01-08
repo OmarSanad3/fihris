@@ -41,10 +41,11 @@ const filteringBookData = {
 
 /* ------------------------------- Rendering Logic ------------------------------- */
 
-(() => {
+const render = () => {
   renderBookTable();
   renderSelectElements();
-})();
+};
+render();
 
 function renderBookTable() {
   const passSearch = (bookTitle, bookISBN) => {
@@ -94,18 +95,37 @@ function renderBookTable() {
 }
 
 function renderSelectElements() {
+  /* Clearing options */
+  selectCategoryFilterEle.innerHTML = "";
+  selectCategoryAddBookEle.innerHTML = "";
+  selectStatusFilterEle.innerHTML = "";
+  selectStatusAddBookEle.innerHTML = "";
+  selectAuthorAddBookEle.innerHTML = "";
+
+  /* Adding options */
+  selectCategoryFilterEle.insertAdjacentHTML("beforeend", `<option value="all">All Categories</option>`);
+  selectCategoryAddBookEle.insertAdjacentHTML("beforeend", `<option value="" disabled selected>Select a category</option>`);
   allowedCategories.forEach((cat) => {
     let opt = `<option value="${cat.toLowerCase()}">${cat}</option>`;
-    selectCategoryFilterEle.insertAdjacentHTML("beforeend", opt);
     selectCategoryAddBookEle.insertAdjacentHTML("beforeend", opt);
+    if (cat === filteringBookData.category) {
+      opt = `<option value="${cat.toLowerCase()}" selected>${cat}</option>`;
+    }
+    selectCategoryFilterEle.insertAdjacentHTML("beforeend", opt);
   });
 
+  selectStatusFilterEle.insertAdjacentHTML("beforeend", `<option value="all" selected>All Statuses</option>`);
+  selectStatusAddBookEle.insertAdjacentHTML("beforeend", `<option value="" disabled selected>Select a status</option>`);
   allowedStatuses.forEach((status) => {
     let opt = `<option value="${status.toLowerCase()}">${status}</option>`;
-    selectStatusFilterEle.insertAdjacentHTML("beforeend", opt);
     selectStatusAddBookEle.insertAdjacentHTML("beforeend", opt);
+    if (status === filteringBookData.status) {
+      opt = `<option value="${status.toLowerCase()}" selected>${status}</option>`;
+    }
+    selectStatusFilterEle.insertAdjacentHTML("beforeend", opt);
   });
 
+  selectAuthorAddBookEle.insertAdjacentHTML("beforeend", `<option value="" disabled selected>Select an author</option>`);
   library.authors.forEach((author) => {
     let opt = `<option value="${author._id}">${author.name}</option>`;
     selectAuthorAddBookEle.insertAdjacentHTML("beforeend", opt);
@@ -173,7 +193,7 @@ addBookForm.addEventListener("submit", (event) => {
     const newBook = new Book(title, isbn, authorId, category, status);
     library.addBook(newBook);
 
-    renderBookTable();
+    render();
 
     addBookModal.classList.remove("flex");
     addBookModal.classList.add("hidden");
@@ -210,17 +230,23 @@ addBookModal.addEventListener("click", (event) => {
 
 searchBookFilterEle.addEventListener("input", (event) => {
   filteringBookData.search = norm(event.target.value);
-  renderBookTable();
+  console.log(filteringBookData);
+  
+  render();
 });
 
 selectCategoryFilterEle.addEventListener("change", (event) => {
   filteringBookData.category = norm(event.target.value);
-  renderBookTable();
+  console.log(filteringBookData);
+  
+  render();
 });
 
 selectStatusFilterEle.addEventListener("change", (event) => {
   filteringBookData.status = norm(event.target.value);
-  renderBookTable();
+  console.log(filteringBookData);
+  
+  render();
 });
 
 /* ------------------------------- Edit a Book ------------------------------- */
@@ -261,7 +287,7 @@ window.editBook = (rowId) => {
       if (status) updatedBook.status = status;
 
       library.updateBook(bookId, updatedBook);
-      renderBookTable();
+      render();
 
       document.getElementById(rowId).dataset.editing = "false";
     } catch (err) {
@@ -273,11 +299,11 @@ window.editBook = (rowId) => {
 window.cancelBook = (rowId) => {
   // const bookId = rowId.split("-").splice(2, 1000).join("-");
   document.getElementById(rowId).dataset.editing = "false";
-  renderBookTable();
+  render();
 };
 
 window.deleteBook = (rowId) => {
   const bookId = rowId.split("-").splice(2, 1000).join("-");
   library.removeBook(bookId);
-  renderBookTable();
+  render();
 };
