@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Toggle Theme -->
-    <script src="./js/ui/utils/toggle-theme.js"></script>
+  <script src="./js/ui/utils/toggle-theme.js"></script>
 
   <!-- Icons -->
   <link href="./css/all.min.css" rel="stylesheet" />
@@ -50,7 +50,8 @@
           <i class="fa-regular fa-folder-open"></i>
           <span>Categories</span>
         </button>
-        <button id="go-to-settings-section" class="side-btn" style="display: none;" onclick="navigateTo('settings-section')">
+        <button id="go-to-settings-section" class="side-btn" style="display: none;"
+          onclick="navigateTo('settings-section')">
           <i class="fa-solid fa-gear"></i>
           <span>Settings</span>
         </button>
@@ -59,30 +60,38 @@
 
     <main class="flex flex-col flex-1 w-full min-h-screen">
       <header id="content-title"
-        class="top-0 z-50 sticky flex justify-between items-center gap-10 bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
+        class="top-0 z-50 sticky flex justify-between items-center gap-3 bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
         <div class="flex justify-between items-center gap-3">
           <button id="menu-toggle" class="lg:hidden p-4 text-gray-600">
             <i class="fa-solid fa-bars"></i>
           </button>
           <h1 id="section-title" class="font-semibold text-gray-900 dark:text-white text-xl md:text-2xl">Dashboard</h1>
         </div>
-        <div class="flex justify-between items-center gap-3">
-          <button
-            onclick="changeLanguage()"
-            class="flex justify-center items-center gap-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 p-2 rounded-lg text-gray-800 dark:text-white text-base hover:scale-110 transition-all duration-300 cursor-pointer">
+        <div class="flex justify-between gap-3">
+          <button onclick="changeLanguage()"
+            class="flex justify-center items-center gap-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-2 rounded-lg text-gray-800 dark:text-white text-base hover:scale-110 transition-all duration-300 cursor-pointer">
             <i class="fa-solid fa-globe"></i>
             En
           </button>
 
-          <button
-            onclick="toggleTheme()"
-            class="flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
+          <button onclick="toggleTheme()"
+            class="flex justify-center items-center gap-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-2 rounded-lg text-gray-800 dark:text-white text-base hover:scale-110 transition-all duration-300 cursor-pointer">
             <div class="dark:hidden block">
               <i class="text-xl fa-solid fa-moon"></i>
             </div>
             <div class="hidden dark:block">
               <i class="text-xl fa-solid fa-sun"></i>
             </div>
+          </button>
+
+          <button
+            class="flex justify-center items-center gap-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-2 rounded-lg text-gray-800 dark:text-white text-base hover:scale-110 transition-all duration-300 cursor-pointer">
+            <div class="flex justify-center items-center bg-blue-600 p-2 rounded-full w-8 h-8 text-white">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <span class="hidden md:inline">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
           </button>
         </div>
       </header>
@@ -213,7 +222,8 @@
     <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded-lg w-4/5 max-w-md transition-all transform">
       <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
         <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Add New Book</h3>
-        <button id="close-add-book-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
+        <button id="close-add-book-btn"
+          class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <form id="add-book-form" class="space-y-6">
@@ -275,7 +285,8 @@
     <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded w-4/5 max-w-md transition-all transform">
       <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
         <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Add New Author</h3>
-        <button id="close-add-author-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
+        <button id="close-add-author-btn"
+          class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <form id="add-author-form" class="space-y-6">
@@ -312,7 +323,8 @@
     <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded w-4/5 max-w-md transition-all transform">
       <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
         <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Author's Books</h3>
-        <button id="close-show-author-books-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
+        <button id="close-show-author-books-btn"
+          class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <div id="author-books-container" class="space-y-2 max-h-100 overflow-auto">
