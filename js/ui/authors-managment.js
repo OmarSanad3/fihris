@@ -1,4 +1,5 @@
 import { library } from "../logic/app.js";
+import Author from "../logic/classes/Author.js";
 import AuthorBookRow from "./components/AuthorBookRow.js";
 import AuthorRow from "./components/AuthorRow.js";
 
@@ -51,6 +52,11 @@ addAuthorForm.addEventListener("submit", (event) => {
   addAuthorModal.classList.remove("flex");
   addAuthorModal.classList.add("hidden");
 
+  const newAuthor = new Author(authorName, authorNationality);
+  library.addAuthor(newAuthor);
+
+  render();
+  
   addAuthorForm.reset();
 });
 
