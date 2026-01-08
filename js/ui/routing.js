@@ -1,5 +1,6 @@
 import { render as renderBooksPage } from "../ui/book-managment.js";
 import {render as renderAuthorsPage} from "../ui/authors-managment.js"
+import {render as renderCategoriesPage} from "../ui/categories-section.js"
 
 const [
   dashboardSectionEle,
@@ -70,6 +71,7 @@ window.navigateTo = (section) => {
       categoriesSectionEle.classList.remove("hidden");
       goToCategoriesBtn.classList.add("active");
       sectionTitleEle.textContent = "Categories";
+      renderCategoriesPage();
       break;
     case "settings-section":
       settingsSectionEle.classList.remove("hidden");

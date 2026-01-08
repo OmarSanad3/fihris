@@ -162,17 +162,15 @@
             <div class="flex lg:flex-row flex-col gap-4">
               <div class="relative flex-1">
                 <i class="top-1/2 left-3 absolute text-gray-500 -translate-y-1/2 transform fa-solid fa-search"></i>
-                <input
-                  id="search-book-filter"
-                type="search"
+                <input id="search-book-filter" type="search"
                   class="bg-gray-50 dark:bg-gray-900 py-2 pr-4 pl-10 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-gray-900 dark:text-white placeholder-gray-500"
                   placeholder="Search for books...">
               </div>
               <select name="category" id="select-category-filter" class="selection-element">
-                
+
               </select>
               <select name="status" id="select-status-filter" class="selection-element">
-                
+
               </select>
             </div>
           </div>
@@ -234,7 +232,12 @@
         </section>
 
         <section id="categories-section" class="hidden section">
-
+          <div>
+            <h2 class="mb-1 text-gray-900 dark:text-white">Categories</h2>
+            <p class="text-gray-600 dark:text-gray-400">Browse books by category</p>
+          </div>
+          <div id="categories-cards-container" class="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          </div>
         </section>
 
         <section id="settings-section" class="hidden section">
@@ -271,7 +274,7 @@
           <label class="form-label">
             Author
             <select id="select-author-add-book" name="author" class="form-input" required>
-              
+
             </select>
           </label>
         </div>
@@ -279,7 +282,7 @@
           <label class="form-label">
             Category
             <select id="select-category-add-book" name="category" class="form-input" required>
-              
+
             </select>
           </label>
         </div>
@@ -287,7 +290,7 @@
           <label class="form-label">
             Status
             <select id="select-status-add-book" name="status" class="form-input" required>
-              
+
             </select>
           </label>
         </div>
@@ -360,10 +363,9 @@
 
   <!-- ************************************************************ End Popups ************************************************************ -->
 
-
   <!-- responsive sidebar file -->
   <script src="./js/ui/utils/responsive-side-bar.js" type="module"></script>
-  
+
   <!-- routing js file -->
   <script src="./js/ui/routing.js" type="module"></script>
 
@@ -375,6 +377,9 @@
 
   <!-- authors management section js file -->
   <script src="./js/ui/authors-managment.js" type="module"></script>
+
+  <!-- Category js file -->
+  <script src="./js/ui/categories-section.js" type="module"></script>
 
   <!-- logic app js file (LOGIC) -->
   <script src="./js/logic/app.js" type="module"></script>
