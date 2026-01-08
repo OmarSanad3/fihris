@@ -1,6 +1,7 @@
+import {render as renderDashboardPage} from "./dashboard.js"
 import { render as renderBooksPage } from "./book-management.js";
 import {render as renderAuthorsPage} from "./authors-management.js"
-import {render as renderCategoriesPage} from "../ui/categories-section.js"
+import {render as renderCategoriesPage} from "./categories-section.js"
 
 const [
   dashboardSectionEle,
@@ -54,6 +55,7 @@ window.navigateTo = (section) => {
       dashboardSectionEle.classList.remove("hidden");
       goToDashboardBtn.classList.add("active");
       sectionTitleEle.textContent = "Dashboard";
+      renderDashboardPage();
       break;
     case "books-section":
       booksSectionEle.classList.remove("hidden");

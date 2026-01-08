@@ -31,10 +31,7 @@ const statsStyle = [
   },
 ];
 
-const categories = ["Fiction", "Sci-Fi", "History", "Cooking", "Mystery"];
-const bookCounts = [12, 19, 7, 5, 14];
-
-const render = () => {
+export const render = () => {
   const statsData = calcStatsForDashboard();
 
   dashboardStatsContainer.innerHTML = "";

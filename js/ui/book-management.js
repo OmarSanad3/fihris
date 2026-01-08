@@ -281,9 +281,10 @@ window.editBook = (rowId) => {
       if (status) updatedBook.status = status;
 
       library.updateBook(bookId, updatedBook);
-      render();
 
       document.getElementById(rowId).dataset.editing = "false";
+
+      render();
     } catch (err) {
       window.alert(err.message);
     }
