@@ -47,7 +47,7 @@
           <i class="fa-regular fa-folder-open"></i>
           <span>Categories</span>
         </button>
-        <button id="go-to-settings-section" class="side-btn" onclick="navigateTo('settings-section')">
+        <button id="go-to-settings-section" class="side-btn" style="display: none;" onclick="navigateTo('settings-section')">
           <i class="fa-solid fa-gear"></i>
           <span>Settings</span>
         </button>
@@ -212,10 +212,10 @@
   <!-- ------------------------------- Add Book Popup ------------------------------- -->
   <div id="add-book-modal" class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
 
-    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="font-semibold text-gray-800 text-xl">Add New Book</h3>
-        <button id="close-add-book-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+    <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded-lg w-4/5 max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
+        <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Add New Book</h3>
+        <button id="close-add-book-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <form id="add-book-form" class="space-y-6">
@@ -258,7 +258,7 @@
 
         <div class="flex justify-between space-x-3 mt-6">
           <button type="button" id="cancel-add-book-btn"
-            class="flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-medium text-gray-700 text-sm">
+            class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 px-4 py-2 rounded-md font-medium text-gray-700 dark:text-gray-300 text-sm">
             Cancel
           </button>
           <button type="submit"
@@ -274,10 +274,10 @@
   <div id="add-author-modal"
     class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
 
-    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="font-semibold text-gray-800 text-xl">Add New Author</h3>
-        <button id="close-add-author-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+    <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded w-4/5 max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
+        <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Add New Author</h3>
+        <button id="close-add-author-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <form id="add-author-form" class="space-y-6">
@@ -295,7 +295,7 @@
         </div>
         <div class="flex justify-between space-x-3 mt-6">
           <button type="button" id="cancel-add-author-btn"
-            class="flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-medium text-gray-700 text-sm">
+            class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 px-4 py-2 rounded-md font-medium text-gray-700 dark:text-gray-300 text-sm">
             Cancel
           </button>
           <button type="submit"
@@ -311,10 +311,10 @@
   <div id="show-author-books-modal"
     class="hidden z-50 fixed inset-0 flex justify-center items-center bg-black/50 bg-opacity-50">
 
-    <div class="bg-white shadow-xl p-6 rounded-lg w-full max-w-md transition-all transform">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="font-semibold text-gray-800 text-xl">Author's Books</h3>
-        <button id="close-show-author-books-btn" class="p-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+    <div class="bg-white dark:bg-gray-800 shadow-xl p-6 rounded w-4/5 max-w-md transition-all transform">
+      <div class="flex justify-between items-center mb-4 border-gray-200 dark:border-gray-700 border-b">
+        <h3 class="font-semibold text-gray-900 dark:text-white text-xl">Author's Books</h3>
+        <button id="close-show-author-books-btn" class="hover:bg-gray-100 dark:hover:bg-gray-700 p-4 text-gray-400 text-2xl">&times;</button>
       </div>
 
       <div id="author-books-container" class="space-y-2 max-h-100 overflow-auto">

@@ -1,5 +1,4 @@
 import {
-  calcCategoriesStats,
   calcDiagram1sData,
   calcDiagram2sData,
   calcStatsForDashboard,
