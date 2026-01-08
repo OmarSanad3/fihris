@@ -8,6 +8,9 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <!-- Toggle Theme -->
+    <script src="./js/ui/utils/toggle-theme.js"></script>
+
   <!-- Icons -->
   <link href="./css/all.min.css" rel="stylesheet" />
 
@@ -56,7 +59,7 @@
 
     <main class="flex flex-col flex-1 w-full min-h-screen">
       <header id="content-title"
-        class="top-0 sticky flex justify-between items-center bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
+        class="top-0 z-50 sticky flex justify-between items-center gap-10 bg-white dark:bg-gray-900 px-4 py-3 border-gray-200 dark:border-gray-800 border-b">
         <div class="flex justify-between items-center gap-3">
           <button id="menu-toggle" class="lg:hidden p-4 text-gray-600">
             <i class="fa-solid fa-bars"></i>
@@ -64,27 +67,22 @@
           <h1 id="section-title" class="font-semibold text-gray-900 dark:text-white text-xl md:text-2xl">Dashboard</h1>
         </div>
         <div class="flex justify-between items-center gap-3">
-          <div class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-            <button
-              class="bg-white dark:bg-gray-700 shadow-sm px-3 py-1.5 rounded-md text-gray-900 dark:text-white transition-colors">
-              En
-            </button>
-            <button
-              class="px-3 py-1.5 rounded-md text-gray-600 hover:text-gray-900 dark:hover:text-white dark:text-gray-400 transition-colors">
-              Ar
-            </button>
-          </div>
           <button
-            class="hidden md:flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
-            <i class="text-xl fa-solid fa-moon"></i>
+            onclick="changeLanguage()"
+            class="flex justify-center items-center gap-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 p-2 rounded-lg text-gray-800 dark:text-white text-base hover:scale-110 transition-all duration-300 cursor-pointer">
+            <i class="fa-solid fa-globe"></i>
+            En
           </button>
+
           <button
-            class="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300">
-            <div class="flex justify-center items-center bg-blue-600 p-2 rounded-full w-8 h-8 text-white">
-              <i class="fa-solid fa-user"></i>
+            onclick="toggleTheme()"
+            class="flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg text-gray-700 dark:text-gray-300">
+            <div class="dark:hidden block">
+              <i class="text-xl fa-solid fa-moon"></i>
             </div>
-            <span>Admin</span>
-            <i class="fa-solid fa-chevron-down"></i>
+            <div class="hidden dark:block">
+              <i class="text-xl fa-solid fa-sun"></i>
+            </div>
           </button>
         </div>
       </header>
@@ -95,11 +93,11 @@
           </div>
           <div class="flex flex-wrap justify-center lg:justify-between gap-6 w-full">
             <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
-              <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Books per Category</h2>
+              <h2 class="mb-4 font-semibold text-gray-800 dark:text-gray-100 text-2xl">Books per Category</h2>
               <canvas id="bookPerCategory"></canvas>
             </div>
             <div class="w-90/100 lg:w-48/100 min-w-90 h-115 chart">
-              <h2 class="mb-4 font-semibold text-gray-800 text-2xl">Borrowed vs Available</h2>
+              <h2 class="mb-4 font-semibold text-gray-800 dark:text-gray-100 text-2xl">Borrowed vs Available</h2>
               <canvas id="borrowedVSAvailable"></canvas>
             </div>
           </div>
