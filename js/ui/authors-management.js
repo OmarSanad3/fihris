@@ -19,6 +19,8 @@ const authorBooksContainer = document.getElementById("author-books-container");
 
 const authorsTableBody = document.getElementById("authors-table-body");
 
+const numOfAuthorsEle =  document.getElementById('num-of-authors');
+
 /* Rendering Logic */
 
 export const render = () => {
@@ -35,6 +37,8 @@ export const render = () => {
     );
     authorsTableBody.innerHTML += authorRowHTML;
   });
+
+  numOfAuthorsEle.textContent = library.getAuthors().length;
 };
 render();
 

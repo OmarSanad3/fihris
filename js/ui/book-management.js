@@ -29,6 +29,9 @@ const [
   document.getElementById("select-status-add-book"),
 ];
 
+const numOfBooksEle =  document.getElementById('num-of-books');
+
+
 /* ------------------------------- Declared Variable ------------------------------- */
 
 const norm = (w) => w.toLowerCase().trim();
@@ -44,6 +47,7 @@ const filteringBookData = {
 export const render = () => {
   renderBookTable();
   renderSelectElements();
+  numOfBooksEle.textContent = library.getBooks().length;
 };
 render();
 
