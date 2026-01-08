@@ -1,4 +1,5 @@
-import { render as renderBookPage } from "../ui/book-managment.js";
+import { render as renderBooksPage } from "../ui/book-managment.js";
+import {render as renderAuthorsPage} from "../ui/authors-managment.js"
 
 const [
   dashboardSectionEle,
@@ -57,12 +58,13 @@ window.navigateTo = (section) => {
       booksSectionEle.classList.remove("hidden");
       goToBooksBtn.classList.add("active");
       sectionTitleEle.textContent = "Books Management";
-      renderBookPage();
+      renderBooksPage();
       break;
     case "authors-section":
       authorsSectionEle.classList.remove("hidden");
       goToAuthorsBtn.classList.add("active");
       sectionTitleEle.textContent = "Authors Management";
+      renderAuthorsPage();
       break;
     case "categories-section":
       categoriesSectionEle.classList.remove("hidden");

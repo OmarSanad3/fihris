@@ -20,7 +20,7 @@ const authorsTableBody = document.getElementById("authors-table-body");
 
 /* Rendering Logic */
 
-const render = () => {
+export const render = () => {
   authorsTableBody.innerHTML = "";
   library.authors.forEach((author) => {
     const authorsBooks = library.books.filter(
