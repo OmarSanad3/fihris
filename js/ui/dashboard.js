@@ -1,3 +1,45 @@
+import { calcStatsForDashboard } from "../ui/utils/statistics.js";
+import Stats from "./components/Stats.js";
+
+const dashboardStatsContainer = document.getElementById(
+  "dashboard-stats-container"
+);
+
+const statsStyle = [
+  {
+    icon: `<i class="text-blue-600 dark:text-blue-400 text-2xl fa-solid fa-swatchbook"></i>`,
+    iconBgColor: "bg-blue-50 dark:bg-blue-900/20",
+  },
+  {
+    icon: `<i class="text-purple-600 dark:text-purple-400 text-2xl fa-solid fa-user-group"></i>`,
+    iconBgColor: "bg-purple-50 dark:bg-purple-900/20",
+  },
+  {
+    icon: `<i class="text-green-600 dark:text-green-400 text-2xl fa-solid fa-book-open"></i>`,
+    iconBgColor: "bg-green-50 dark:bg-green-900/20",
+  },
+  {
+    icon: `<i class="text-orange-600 dark:text-orange-400 text-2xl fa-solid fa-arrow-trend-up"></i>`,
+    iconBgColor: "bg-orange-50 dark:bg-orange-900/20",
+  },
+];
+
+const statsData = calcStatsForDashboard();
+
+const render = () => {
+  dashboardStatsContainer.innerHTML = "";
+  for (let i = 0; i < 4; i++) {
+    dashboardStatsContainer.insertAdjacentHTML("beforeend", Stats(
+      statsData[i].title,
+      statsStyle[i].icon,
+      statsStyle[i].iconBgColor,
+      statsData[i].value
+    ));
+  }
+};
+render();
+
+/* ---------------- Diagrams ---------------- */
 // 1. Define your data
 const categories = ["Fiction", "Sci-Fi", "History", "Cooking", "Mystery"];
 const bookCounts = [12, 19, 7, 5, 14];
@@ -5,7 +47,6 @@ const bookCounts = [12, 19, 7, 5, 14];
 // 2. Get the context of the canvas
 const ctx = document.getElementById("bookPerCategory").getContext("2d");
 const ctx2 = document.getElementById("borrowedVSAvailable").getContext("2d");
-
 
 // 3. Initialize the Chart
 new Chart(ctx, {
