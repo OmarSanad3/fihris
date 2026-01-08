@@ -1,3 +1,5 @@
+import { render as renderBookPage } from "../ui/book-managment.js";
+
 const [
   dashboardSectionEle,
   booksSectionEle,
@@ -44,7 +46,7 @@ window.navigateTo = (section) => {
   })();
 
   window.closeSideBar();
-  
+
   switch (section) {
     case "dashboard-section":
       dashboardSectionEle.classList.remove("hidden");
@@ -55,6 +57,7 @@ window.navigateTo = (section) => {
       booksSectionEle.classList.remove("hidden");
       goToBooksBtn.classList.add("active");
       sectionTitleEle.textContent = "Books Management";
+      renderBookPage();
       break;
     case "authors-section":
       authorsSectionEle.classList.remove("hidden");
@@ -80,7 +83,6 @@ window.navigateTo = (section) => {
   url.searchParams.set("section", section);
   window.history.pushState({}, "", url);
 };
-
 
 (() => {
   const urlParams = new URLSearchParams(window.location.search);

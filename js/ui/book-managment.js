@@ -41,7 +41,7 @@ const filteringBookData = {
 
 /* ------------------------------- Rendering Logic ------------------------------- */
 
-const render = () => {
+export const render = () => {
   renderBookTable();
   renderSelectElements();
 };
@@ -230,22 +230,16 @@ addBookModal.addEventListener("click", (event) => {
 
 searchBookFilterEle.addEventListener("input", (event) => {
   filteringBookData.search = norm(event.target.value);
-  console.log(filteringBookData);
-  
   render();
 });
 
 selectCategoryFilterEle.addEventListener("change", (event) => {
   filteringBookData.category = norm(event.target.value);
-  console.log(filteringBookData);
-  
   render();
 });
 
 selectStatusFilterEle.addEventListener("change", (event) => {
   filteringBookData.status = norm(event.target.value);
-  console.log(filteringBookData);
-  
   render();
 });
 
